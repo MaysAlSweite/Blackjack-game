@@ -21,4 +21,5 @@ h3{
     margin: 2%;
     font-size: x-large;
     border: none;
+    cursor: pointer;
 }
