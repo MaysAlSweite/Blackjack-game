@@ -1,11 +1,16 @@
-const cards=document.getElementById("cards");
-const sumDisplay=document.getElementById("sum");
-const msg=document.getElementById("msg");
-let card1,card2;
-let sum=0;
-function cardAssign () {
+const cards = document.getElementById("cards");
+const sumDisplay = document.getElementById("sum");
+const msg = document.getElementById("msg");
+let card1, card2;
+let cardsArray = [];
+let sum = 0;
+hasBlackJack = false;
+isAlive = true;
+function cardAssign() {
     let randomNumber = Math.floor(Math.random() * 13) + 1
     if (randomNumber > 10) {
+        hasBlackJack = false;
+        isAlive = true;
         return 10
     } else if (randomNumber === 1) {
         return 11
@@ -13,24 +18,48 @@ function cardAssign () {
         return randomNumber
     }
 }
-function start(){
-    card1=cardAssign();
-    card2=cardAssign();
-    sum=card1+card2;
-    showCard();
+function start() {
+    cards.innerText = "";
+    sumDisplay.innerText = "";
+    isAlive = true;
+    card1 = cardAssign();
+    card2 = cardAssign();
+    cardsArray = [card1, card2];
+    sum = card1 + card2;
+    showCards();
 }
-function showCard(){
-    cards.innerText=` ${card1}  ${card2}`;
-    sum.innerText=` ${sum}  `;
+function showCards() {
+    cards.innerText = "";
+
+    cardsArray.forEach(card => {
+        cards.innerText += ` ${card}  `;
+    });
+
+    sumDisplay.innerText = `Sum: ${sum}  `;
+    checkWin();
+}
+function checkWin() {
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
     } else if (sum === 21) {
         message = "You've got Blackjack!"
-        // hasBlackJack = true
+        hasBlackJack = true
     } else {
         message = "You're out of the game!"
-        // isAlive = false
+        isAlive = false
     }
-    msg.innerText=message;
-}
+    msg.innerText = message;
 
+
+}
+function newCard() {
+    if (isAlive === true && hasBlackJack === false) {
+        let newcard = cardAssign()
+        sum += newcard
+        sumDisplay.innerText = `Sum: ${sum}  `;
+        cardsArray.push(newcard)
+        cards.innerText += ` ${newcard}  `;
+        showCards();
+
+    }
+}
