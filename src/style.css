@@ -1,0 +1,24 @@
+body{
+background-color: rgba(0, 128, 0, 0.574);
+text-align: center;
+font-family: 'Trebuchet MS',
+    'Lucida Sans Unicode',
+    'Lucida Grande';
+    margin-top: 4%
+}
+.header{
+color: rgb(232, 232, 63);
+}
+h3{
+    color: white;
+}
+#start,#newCard{
+    background-color:rgb(232, 232, 63) ;
+    color:rgba(5, 81, 5, 0.574);
+    width: 180px;
+    display: block;
+    justify-self: center;
+    margin: 2%;
+    font-size: x-large;
+    border: none;
+}
